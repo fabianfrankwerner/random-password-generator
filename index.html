@@ -17,9 +17,9 @@
         <h1>Generate unique<br><span>random passwords</span>.</h1>
         <div class="display">
             <input type="text" id="password" placeholder="Password">
-            <img src="images/copy.svg">
+            <img src="images/copy.svg" onclick="copyPassword()">
         </div>
-        <button onclick="createPassword()">New password</button>
+        <button onclick="createPassword()">Generate unique random password</button>
     </div>
 
     <script>
@@ -45,6 +45,11 @@
                 password += allChars[Math.floor(Math.random() * allChars.length)]
             }
             passwordBox.value = password
+        }
+
+        function copyPassword() {
+            passwordBox.select();
+            document.execCommand("copy");
         }
 
     </script>
