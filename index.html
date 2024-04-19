@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="index.css">
     <title>Random Password Generator</title>
 </head>
@@ -16,30 +17,37 @@
         <h1>Generate unique<br><span>random passwords</span>.</h1>
         <div class="display">
             <input type="text" id="password" placeholder="Password">
-            <img src="images/copy.png">
+            <img src="images/copy.svg">
         </div>
-        <button><img src="images/generate.png">New password</button>
+        <button onclick="createPassword()">New password</button>
     </div>
 
-<script>
+    <script>
 
-    const passwordBox = document.getElementById("password");
-    const length = 20;
+        const passwordBox = document.getElementById("password");
+        const length = 20;
 
-    const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-    const lowerCase = "abcdefghijklmnopqrstuvwxyz";
-    const number = "0123456789";
-    const symbol = "@#%&()+~|{}[]<>/-=";
+        const upperCase = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        const lowerCase = "abcdefghijklmnopqrstuvwxyz";
+        const number = "0123456789";
+        const symbol = "@#%&()+~|{}[]<>/-=";
 
-    function createPassword() {
-        let password = "";
-        password += upperCase[Math.floor(Math.random() * upperCase.length)]
-        password += lowerCase[Math.floor(Math.random() * lowerCase.length)]
-        password += number[Math.floor(Math.random() * number.length)]
-        password += symbol[Math.floor(Math.random() * symbol.length)]
-    }
+        const allChars = upperCase + lowerCase + number + symbol
 
-</script>
+        function createPassword() {
+            let password = "";
+            password += upperCase[Math.floor(Math.random() * upperCase.length)]
+            password += lowerCase[Math.floor(Math.random() * lowerCase.length)]
+            password += number[Math.floor(Math.random() * number.length)]
+            password += symbol[Math.floor(Math.random() * symbol.length)]
+
+            while (length > password.length) {
+                password += allChars[Math.floor(Math.random() * allChars.length)]
+            }
+            passwordBox.value = password
+        }
+
+    </script>
 
 </body>
 
