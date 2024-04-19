@@ -14,12 +14,12 @@
 
 <body>
     <div class="container">
-        <h1>Generate unique<br><span>random passwords</span>.</h1>
+        <h1>Generate a<br><span>random password</span>.</h1>
         <div class="display">
             <input type="text" id="password" placeholder="Password">
             <img src="images/copy.svg" onclick="copyPassword()">
         </div>
-        <button onclick="createPassword()">Generate unique random password</button>
+        <button onclick="createPassword()">Generate a new random password.</button>
     </div>
 
     <script>
@@ -32,19 +32,33 @@
         const number = "0123456789";
         const symbol = "@#%&()+~|{}[]<>/-=";
 
-        const allChars = upperCase + lowerCase + number + symbol
+        const allChars = upperCase + lowerCase + number + symbol;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+            return array;
+        }
 
         function createPassword() {
             let password = "";
-            password += upperCase[Math.floor(Math.random() * upperCase.length)]
-            password += lowerCase[Math.floor(Math.random() * lowerCase.length)]
-            password += number[Math.floor(Math.random() * number.length)]
-            password += symbol[Math.floor(Math.random() * symbol.length)]
+
+            password += upperCase[Math.floor(Math.random() * upperCase.length)];
+            password += lowerCase[Math.floor(Math.random() * lowerCase.length)];
+            password += number[Math.floor(Math.random() * number.length)];
+            password += symbol[Math.floor(Math.random() * symbol.length)];
+
+            const shuffledChars = shuffleArray(allChars.split("")).join("");
 
             while (length > password.length) {
-                password += allChars[Math.floor(Math.random() * allChars.length)]
+                password += shuffledChars[Math.floor(Math.random() * shuffledChars.length)];
             }
-            passwordBox.value = password
+
+            password = shuffleArray(password.split("")).join("");
+
+            passwordBox.value = password;
         }
 
         function copyPassword() {
